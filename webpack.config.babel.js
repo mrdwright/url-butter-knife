@@ -9,7 +9,7 @@ module.exports = {
 		publicPath: '../dist/',
 		filename: 'url-knife.bundle.js',
 		chunkFilename: '[id].bundle.js',
-        libraryTarget: 'var',
+        libraryTarget: 'commonjs2',
         library: 'Pattern'
 	}
 };
