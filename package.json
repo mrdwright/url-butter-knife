@@ -1,7 +1,7 @@
 {
   "name": "url-butter-knife",
-  "version": "1.0.0",
-  "description": "Extract and decompose (fuzzy) URLs (including emails, which are conceptually a part of URLs) in texts with robust patterns.",
+  "version": "1.0.1",
+  "description": "Extract and decompose (fuzzy) URLs (including emails, which are conceptually a part of URLs) in texts with robust patterns. Smooth as butter.",
   "main": "dist/url-knife.bundle.js",
   "scripts": {
     "build": "gulp",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Andrew-Kang-G/url-knife.git"
+    "url": "git+https://github.com/mrdwright/url-butter-knife.git"
   },
   "keywords": [
     "url parser",
@@ -21,9 +21,9 @@
   "author": "Andrew Kang",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Andrew-Kang-G/url-knife/issues"
+    "url": "https://github.com/mrdwright/url-butter-knife/issues"
   },
-  "homepage": "https://github.com/Andrew-Kang-G/url-knife#readme",
+  "homepage": "https://github.com/mrdwright/url-butter-knife#readme",
   "devDependencies": {
     "babel-core": "^5.8.25",
     "babel-loader": "^8.0.4",
