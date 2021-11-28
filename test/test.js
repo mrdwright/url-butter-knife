@@ -1,59 +1,19 @@
 import Pattern from '../src/controller'
-const assert = require('assert');
-/*function test(title, testCode) {
-    try {
-        testCode();
-    } catch (error) {
-        console.error(error);
-    }
-}*/
 
-function expect(result) {
-    return {
-        toBe: function(expected) {
-            if (result !== expected) {
-                throw new Error(result + ' is not equal to ' + expected);
-            }
-        }
-    }
-}
+describe('BDD style', () => {
 
-/*test('', function() {
-    expect(Pattern.UrlArea.normalizeUrl("htp/:/abcgermany.,def;:9094 #park//noon??abc=retry")["normalizedUrl"])
-        .toBe("http://abcgermany.de:9094#park/noon?abc=retry")
-    ;
-
-});*/
-
-describe('BDD style', function() {
-    before(function() {
-        // excuted before test suite
-    });
-
-    after(function() {
-        // excuted after test suite
-    });
-
-    beforeEach(function() {
-        // excuted before every test
-    });
-
-    afterEach(function() {
-        // excuted after every test
-    });
-
-    describe('UrlArea', function() {
-        it('normalizeUrl', function() {
+    describe('UrlArea', () => {
+        it('normalizeUrl', () => {
             expect(Pattern.UrlArea.normalizeUrl("htp/:/abcgermany.,def;:9094 #park//noon??abc=retry")["normalizedUrl"])
                 .toBe("http://abcgermany.de:9094#park/noon?abc=retry");
         });
-        it('parseUrl', function() {
+        it('parseUrl', () => {
             expect(Pattern.UrlArea.parseUrl("xtp://gooppalgo.com/park/tree/?abc=1")["onlyUriWithParams"])
                 .toBe("/park/tree/?abc=1");
         });
     });
 
-    describe('TextArea', function() {
+    describe('TextArea', () => {
 
         const textStr = 'http://[::1]:8000에서 http ://www.example.com/wpstyle/?p=364 is ok \n' +
             'HTTP://foo.com/blah_blah_(wikipedia) https://www.google.com/maps/place/USA/@36.2218457,... tnae1ver.com:8000on the internet  Asterisk\n ' +
@@ -65,8 +25,10 @@ describe('BDD style', function() {
             'Have <b>you</b> visited goasidaio.ac.kr?abd=5hell0?5...&kkk=5rk.,. abc.def 1353aa.liars다';;
 
 
-        it('extractAllUrls', function() {
-            assert.deepEqual(Pattern.TextArea.extractAllUrls(textStr), [
+        it('extractAllUrls', () => {
+            const match = Pattern.TextArea.extractAllUrls(textStr);
+    
+            expect(match).toEqual([
                 {
                     "value": {
                         "url": "http://[::1]:8000",
@@ -327,11 +289,11 @@ describe('BDD style', function() {
                         "end": 660
                     }
                 }
-            ])
+            ]);
         });
 
         it('extractAllUrlsWithIntranets', function() {
-            assert.deepEqual(Pattern.TextArea.extractAllUrls(textStr, {ip_v4 : false, ip_v6 :false, localhost : false,  intranet : true}), [
+            expect(Pattern.TextArea.extractAllUrls(textStr, {ip_v4 : false, ip_v6 :false, localhost : false,  intranet : true})).toEqual([
                 {
                     "value": {
                         "url": "http://[::1]:8000",
@@ -651,11 +613,11 @@ describe('BDD style', function() {
                         "end": 684
                     }
                 }
-            ])
+            ]);
         });
 
        it('extractAllEmails', function() {
-            assert.deepEqual(Pattern.TextArea.extractAllEmails(textStr, true), [
+            expect(Pattern.TextArea.extractAllEmails(textStr, true)).toEqual([
                 {
                     "value": {
                         "email": "가나다@apacbook.ac.kr",
@@ -722,19 +684,19 @@ describe('BDD style', function() {
                     },
                     "pass": true
                 }
-            ])
+            ]);
         })
 
 
-            const textStr2 = '142 .42.1.1,:,,8080 123.45xtp://--[::1]:8000에서 httt //-www.ex ample;comm                      /wpstyle/??p=3?6/4&x=5/3 in the ssh h::/;/ww.example.com/wpstyle/?p=364 is ok ' +
-            'h ttp:/://132 .42.,1.1 HT TP:// foo, co,.kr/blah_blah_(wikipedia) localhost   :80 https://www.google .org :8005/maps/place/USA/@36.2218457,... tnae1ver.co. jp;8000on the internet  Asterisk\n ' +
-            'the packed1book,ac,.kr,.net. 가나다@apacbook.ac.kr fakeshouldnotbedetected.url?abc=fake s5houl７十七日dbedetected.jp?japan=go&html=<span>가나다@pacbook.travelersinsurance</span>;' +
-            ' abc,co.krr//ad/fg/?kk=5 abc@daum.net Have you visited http://agoasidaio.ac.kr ?abd=55...,.&kkk=5rk.,, ' +
-            'Have <b>you</b> visited goasidaio.ac.kr?abd=5hell0?5...&kkk=5rk.,. ';
+        const textStr2 = '142 .42.1.1,:,,8080 123.45xtp://--[::1]:8000에서 httt //-www.ex ample;comm                      /wpstyle/??p=3?6/4&x=5/3 in the ssh h::/;/ww.example.com/wpstyle/?p=364 is ok ' +
+        'h ttp:/://132 .42.,1.1 HT TP:// foo, co,.kr/blah_blah_(wikipedia) localhost   :80 https://www.google .org :8005/maps/place/USA/@36.2218457,... tnae1ver.co. jp;8000on the internet  Asterisk\n ' +
+        'the packed1book,ac,.kr,.net. 가나다@apacbook.ac.kr fakeshouldnotbedetected.url?abc=fake s5houl７十七日dbedetected.jp?japan=go&html=<span>가나다@pacbook.travelersinsurance</span>;' +
+        ' abc,co.krr//ad/fg/?kk=5 abc@daum.net Have you visited http://agoasidaio.ac.kr ?abd=55...,.&kkk=5rk.,, ' +
+        'Have <b>you</b> visited goasidaio.ac.kr?abd=5hell0?5...&kkk=5rk.,. ';
 
 
         it('extractAllFuzzyUrls', function() {
-            assert.deepEqual(Pattern.TextArea.extractAllFuzzyUrls(textStr2), [
+            expect(Pattern.TextArea.extractAllFuzzyUrls(textStr2)).toEqual([
                 {
                     "value": {
                         "url": "142 .42.1.1,:,,8080",
@@ -1007,7 +969,7 @@ describe('BDD style', function() {
                     },
                     "area": "text"
                 }
-            ])
+            ]);
         });
 
     });
